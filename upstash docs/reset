@@ -1,0 +1,21 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://upstash.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Reset
+
+The `reset` method allows you to clear all documents from a particular index.
+
+## Response
+
+`'Success'` if the database is successfully reset.
+
+<RequestExample>
+  ```typescript Basic theme={"system"}
+  const responseReset = await index.reset();
+  // 'Success'
+  ```
+</RequestExample>
+
+
+Built with [Mintlify](https://mintlify.com).

@@ -1,0 +1,84 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://upstash.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Fetch
+
+Used to retrieve documents by their IDs.
+
+## Arguments
+
+<ResponseField name="IDs" type="string[] | number[]" required>
+  The IDs of the documents you want to fetch.
+</ResponseField>
+
+**OR**
+
+<ResponseField name="FetchPayload" type="object" required>
+  <Expandable defaultOpen="true">
+    <ResponseField name="ids" type="string[] | number[]">
+      The IDs of the documents you want to fetch.
+    </ResponseField>
+
+    <ResponseField name="prefix" type="string">
+      An ID prefix to match document IDs.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Response
+
+<ResponseField name="FetchResult[]" type="Document[]" required>
+  This field is `null` if no document with the specified ID is found.
+
+  <Expandable defaultOpen="true">
+    <ResponseField name="id" type="string | number" required>
+      The ID of the resulting document.
+    </ResponseField>
+
+    <ResponseField name="content" type="Record<string, unknown>" />
+
+    <ResponseField name="metadata" type="Record<string, unknown>" />
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+  ```typescript Basic theme={"system"}
+  await index.fetch({ ids: ["star-wars", "inception"] });
+  /*
+  [
+    {
+      id: "star-wars",
+      content: { ... },
+      metadata: { ... }
+    },
+    {
+      id: "inception",
+      content: { ... },
+      metadata: { ... }
+    }
+  ]
+  */
+  ```
+
+  ```typescript ID prefix theme={"system"}
+  await index.fetch({ prefix: "star-" });
+  /*
+  [
+    {
+      id: "star-wars"
+      content: { ... },
+      metadata: { ... }
+    },
+    {
+      id: "star-trek",
+      content: { ... },
+      metadata: { ... }
+    }
+  ]
+  */
+  ```
+</RequestExample>
+
+
+Built with [Mintlify](https://mintlify.com).

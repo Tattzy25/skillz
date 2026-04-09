@@ -1,0 +1,65 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://upstash.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Upsert
+
+Used to add new documents or update an existing document.
+
+<Note>
+  You can only upsert documents with the same structure as defined in your database.
+</Note>
+
+## Arguments
+
+<ResponseField name="DocumentPayload" type="Document | Document[]" required>
+  <Expandable defaultOpen="true">
+    <ResponseField name="id" type="string | number" required />
+
+    <ResponseField name="content" type="Record<string, unknown>" />
+
+    <ResponseField name="metadata" type="Record<string, unknown>" />
+  </Expandable>
+</ResponseField>
+
+## Response
+
+<ResponseField type="str" required>
+  `'Success'` on successful operation.
+</ResponseField>
+
+<RequestExample>
+  ```typescript Single Document theme={"system"}
+  await index.upsert({
+    id: "star-wars",
+    content: { title: "Star Wars", genre: "sci-fi" },
+    metadata: { year: 1977 }
+  });
+  ```
+
+  ```typescript Multiple Documents theme={"system"}
+  await index.upsert([
+    {
+      id: "inception",
+      content: { title: "Inception", genre: "action" }
+      metadata: {
+        year: 2010,
+      },
+    },
+    { ... },
+  ]);
+  ```
+
+  ```typescript Update Document theme={"system"}
+  await index.upsert({
+    id: "star-wars",
+    content: {
+      title: "Star Wars: Episode IV - A New Hope",
+      genre: "sci-fi"
+    },
+  });
+  ```
+</RequestExample>
+
+
+Built with [Mintlify](https://mintlify.com).
